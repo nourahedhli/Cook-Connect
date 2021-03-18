@@ -1,0 +1,7 @@
+{
+  "name": "Cook-Connect",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
