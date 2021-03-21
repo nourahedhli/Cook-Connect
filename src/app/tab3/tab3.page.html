@@ -1,14 +1,94 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar style="background-color: #F5C489">
     <ion-title>
       New Recipe
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [scrollEvents]="true" [fullscreen]="true">
+
+
+
+  <ion-list-header>
+    <ion-label style="font-size: 29px" >Ingredients</ion-label>
+    <ion-icon style=" margin-right: 40px; font-size: 33px;" name="add-circle-outline"></ion-icon>
+  </ion-list-header>
+
+
   <ion-item>
-    <ion-label position = "floating">Recipe Name</ion-label>
+    <ion-label style="color: #b8bab9;"  position = "floating">Recipe Name</ion-label>
     <ion-input></ion-input>
   </ion-item>
+
+  <ion-item>
+    <ion-label style="color: #b8bab9;"  position = "floating">Almond Flour</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label style="color: #b8bab9;"   position = "floating">Butter</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label style="color: #b8bab9;" position = "floating">Sugar</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+
+
+<ion-list-header>
+  <ion-label style="font-size: 29px; " >Method</ion-label>
+</ion-list-header>
+
+  <ion-item>
+    <ion-label style="color: #b8bab9;"  position = "floating">How to make this yummy recipe</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+
+  <ion-list-header>
+    <ion-label style="font-size: 29px; margin-bottom: 15px; " >Classifications</ion-label>
+    <ion-icon style=" margin-right: 40px; font-size: 33px; margin-bottom: 9px;" name="add-circle-outline"></ion-icon>
+  </ion-list-header>
+
+
+  <ion-text  >
+    <h1 style="font-size: 16px; margin-left: 20px" >Select all that apply or add custom categories!</h1>
+  </ion-text>
+
+ 
+  <mat-form-field style="font-size: 20px;"  class="example-chip-list">
+
+    <mat-chip-list #chipList aria-label="Category selection" >
+      <mat-chip *ngFor="let cat of categories" [selectable]="selectable"
+                [removable]="removable" (removed)="remove(cat)">
+        {{cat.name}}
+        <mat-icon matChipRemove *ngIf="removable">close</mat-icon>
+      </mat-chip>
+      <label>
+        <input placeholder="New Category"
+               [matChipInputFor]="chipList"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               [matChipInputAddOnBlur]="addOnBlur"
+               (matChipInputTokenEnd)="add($event)">
+      </label>
+    </mat-chip-list>
+  </mat-form-field>
+
+
+
+  <ion-text  >
+    <h1 style="font-size: 20px;  text-align: center;" >Add photos of your creation</h1>
+  </ion-text>
+
+
+  <ion-fab horizontal="center"  >
+    <ion-fab-button style="margin-bottom: 70px; " (click)="addPhotoToGallery()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+<br>
+  <br>
+
+
 </ion-content>

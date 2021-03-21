@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Tab3Page } from './tab3.page';
+import {MatChipInputEvent} from '@angular/material/chips';
 
 const routes: Routes = [
   {
