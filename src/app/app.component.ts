@@ -34,6 +34,7 @@ export class AppComponent implements OnInit {
  
  
   loginWithGmail() {
+    /*
     firebase.auth().signInWithPopup(this.provider).then(function(result) {
      var user = result.user;
      console.log(user.email);
@@ -45,6 +46,36 @@ export class AppComponent implements OnInit {
       var email = error.email;
       var credential = error.credential;
     });
+    */
+    firebase.auth()
+  .signInWithPopup(this.provider)
+  .then((result) => {
+    /** @type {firebase.auth.OAuthCredential} */
+    let credential:any;
+
+     credential = result.credential;
+
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    console.log(user.email);
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
+
+
+
+
+
   }
 
   facebookLogin(){
