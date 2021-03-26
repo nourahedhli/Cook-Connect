@@ -73,9 +73,6 @@ export class AppComponent implements OnInit {
   });
 
 
-
-
-
   }
 
   facebookLogin(){
