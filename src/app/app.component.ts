@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     var provider = new firebase.auth.GoogleAuthProvider();
+    
     this.provider = provider;
     firebase.auth().onAuthStateChanged(user=> {
       this.user = user;
@@ -34,22 +35,8 @@ export class AppComponent implements OnInit {
  
  
   loginWithGmail() {
-    /*
-    firebase.auth().signInWithPopup(this.provider).then(function(result) {
-     var user = result.user;
-     console.log(user.email);
-     
-    }).catch(function(error) {
-     
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      var email = error.email;
-      var credential = error.credential;
-    });
-    */
-    firebase.auth()
-  .signInWithPopup(this.provider)
-  .then((result) => {
+
+    firebase.auth().signInWithPopup(this.provider).then((result) => {
     /** @type {firebase.auth.OAuthCredential} */
     let credential:any;
 
@@ -76,16 +63,24 @@ export class AppComponent implements OnInit {
   }
 
   facebookLogin(){
-   var provider = new firebase.auth.FacebookAuthProvider();
-   this.provider = provider;
+   
+  var provider = new firebase.auth.FacebookAuthProvider();
+  this.provider = provider;
 
-   firebase.auth().signInWithPopup(provider).then(function(result) {
- 
+  firebase.auth().signInWithPopup(provider).then((result) => {
+    //let credential:any;
+    //credential = result.credential;
+
+    // The signed-in user info.
+    
+
+    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+    //var accessToken = credential.accessToken;
     var user = result.user;
     console.log(user);
-    
-    // ...
-  }).catch(function(error) {
+
+  })
+  .catch((error) => {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
@@ -93,9 +88,11 @@ export class AppComponent implements OnInit {
     var email = error.email;
     // The firebase.auth.AuthCredential type that was used.
     var credential = error.credential;
+
     // ...
   });
-  
+
+
   }
  
   
