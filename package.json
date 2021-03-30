@@ -25,6 +25,7 @@
     "@capacitor/core": "2.4.7",
     "@ionic/angular": "^5.5.2",
     "@ionic/pwa-elements": "^3.0.2",
+    "formBuilder": "^3.6.2",
     "npm": "^7.6.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

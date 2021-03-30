@@ -10,6 +10,7 @@ import {MatChipsModule} from '@angular/material/chips' ;
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatOptionModule} from '@angular/material/core';
 import {MatIconModule} from '@angular/material/icon';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 @NgModule({
   imports: [
@@ -23,6 +24,8 @@ import {MatIconModule} from '@angular/material/icon';
     ReactiveFormsModule,
     MatOptionModule,
     MatIconModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
   ],
   declarations: [Tab3Page]
 })

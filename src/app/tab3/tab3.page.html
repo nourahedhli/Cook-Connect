@@ -6,14 +6,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [scrollEvents]="true" [fullscreen]="true">
+<ion-content  [scrollEvents]="true" [fullscreen]="true">
 
 
 
-  <ion-list-header>
-    <ion-label style="font-size: 29px" >Ingredients</ion-label>
-    <ion-icon style=" margin-right: 40px; font-size: 33px;" name="add-circle-outline"></ion-icon>
-  </ion-list-header>
+
+  <ion-fab style="margin-top: 40px;" horizontal="center"  >
+    <ion-fab-button  (click)="addPhotoToGallery()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-text  >
+    <h1 style="font-size: 20px; margin-top: 110px;  text-align: center;" >Add photos of your creation</h1>
+  </ion-text>
+
+
 
 
   <ion-item>
@@ -21,24 +29,38 @@
     <ion-input></ion-input>
   </ion-item>
 
+  <ion-list-header>
+    <ion-label style="font-size: 29px" >Ingredients</ion-label>
+      <button style="margin-right: 40px; background-color: black;" ion-button >
+    <ion-icon style="  font-size: 33px;" name="add-circle-outline" (click)="addvalue()"></ion-icon>
+      </button>
+  </ion-list-header>
+
+
   <ion-item>
-    <ion-label style="color: #b8bab9;"  position = "floating">Almond Flour</ion-label>
+    <ion-label style="color: #b8bab9;"  position = "floating">First ingredient</ion-label>
     <ion-input></ion-input>
   </ion-item>
 
-  <ion-item>
-    <ion-label style="color: #b8bab9;"   position = "floating">Butter</ion-label>
-    <ion-input></ion-input>
-  </ion-item>
 
-  <ion-item>
-    <ion-label style="color: #b8bab9;" position = "floating">Sugar</ion-label>
-    <ion-input></ion-input>
-  </ion-item>
+  <h2>{{ name }}</h2>
+  <div *ngFor="let value of values; let i = index">
+    <ion-item>
+    <ion-label style="color: #b8bab9;"  position = "floating">ingredient</ion-label>
+    <ion-input [(ngModel)]="value.value" #name="ngModel" name="value{{i}}"></ion-input>
+    </ion-item>
+    <button style="margin-top: 20px; margin-left: 40px;" (click)="removevalue(i)">Remove</button>
+  </div>
+
+
+
 
 
 <ion-list-header>
   <ion-label style="font-size: 29px; " >Method</ion-label>
+  <button style="margin-right: 40px; background-color: black;" ion-button >
+    <ion-icon style="  font-size: 33px;" name="add-circle-outline" (click)="addvalue1()"></ion-icon>
+  </button>
 </ion-list-header>
 
   <ion-item>
@@ -46,9 +68,23 @@
     <ion-input></ion-input>
   </ion-item>
 
+  <h2>{{ name }}</h2>
+  <div *ngFor="let value1 of values1; let i = index">
+    <ion-item>
+      <ion-label style="color: #b8bab9;"  position = "floating">Method</ion-label>
+      <ion-input [(ngModel)]="value1.value" #name="ngModel" name="value1{{i}}"></ion-input>
+    </ion-item>
+    <button style=" margin-top: 20px; margin-left: 40px;" (click)="removevalue1(i)">Remove</button>
+  </div>
+
+
+
+
+
   <ion-list-header>
     <ion-label style="font-size: 29px; margin-bottom: 15px; " >Classifications</ion-label>
-    <ion-icon style=" margin-right: 40px; font-size: 33px; margin-bottom: 9px;" name="add-circle-outline"></ion-icon>
+
+
   </ion-list-header>
 
 
@@ -56,39 +92,70 @@
     <h1 style="font-size: 16px; margin-left: 20px" >Select all that apply or add custom categories!</h1>
   </ion-text>
 
- 
-  <mat-form-field style="font-size: 20px;"  class="example-chip-list">
 
-    <mat-chip-list #chipList aria-label="Category selection" >
-      <mat-chip *ngFor="let cat of categories" [selectable]="selectable"
-                [removable]="removable" (removed)="remove(cat)">
-        {{cat.name}}
-        <mat-icon matChipRemove *ngIf="removable">close</mat-icon>
+  <mat-form-field class="example-chip-list">
+
+    <mat-chip-list #chipList aria-label="Category selection">
+      <mat-chip
+              *ngFor="let category of categories"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="remove(category)">
+        {{category}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
       </mat-chip>
       <label>
-        <input placeholder="New Category"
-               [matChipInputFor]="chipList"
-               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-               [matChipInputAddOnBlur]="addOnBlur"
-               (matChipInputTokenEnd)="add($event)">
+        <input
+
+
+                [formControl]="categoryCtrl"
+                [matAutocomplete]="auto"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)"
+                >
       </label>
     </mat-chip-list>
+    <mat-autocomplete  #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let category of filteredCategories | async" [value]="category">
+        {{category}}
+      </mat-option>
+    </mat-autocomplete>
   </mat-form-field>
 
+  <ion-list-header>
+    <h1 style="font-size: 25px;  " >Publish this recipe to:</h1>
 
 
-  <ion-text  >
-    <h1 style="font-size: 20px;  text-align: center;" >Add photos of your creation</h1>
-  </ion-text>
+  </ion-list-header>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label>Private (Only I can see this recipe)</ion-label>
+      <ion-checkbox color="dark" checked="false"></ion-checkbox>
+    </ion-item>
 
 
-  <ion-fab horizontal="center"  >
-    <ion-fab-button style="margin-bottom: 70px; " (click)="addPhotoToGallery()">
-      <ion-icon name="camera"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-<br>
+    <ion-item>
+      <ion-label>Group A</ion-label>
+      <ion-checkbox color="dark" checked="false"></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Group B</ion-label>
+      <ion-checkbox color="dark" checked="false"></ion-checkbox>
+    </ion-item>
+
+
+  </ion-list>
+
   <br>
 
 
+  <ion-button style="margin-left: 70px;" color="medium">Save as Draft</ion-button>
+  <ion-button style="margin-left: 30px;"  color="medium">Share</ion-button>
+
+  <br>
+  <br>
 </ion-content>
