@@ -3,20 +3,18 @@
 
     <mat-card class="box">
       <mat-card-header>
-        <mat-card-title>Angular Google Login Tutorial</mat-card-title>
+        <mat-card-title>cook and connect</mat-card-title>
       </mat-card-header>
   
       <form >
         <mat-card-content>
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Email">
-          </mat-form-field>
-  
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Password">
-          </mat-form-field>
-        </mat-card-content>
-        <button mat-stroked-button color="accent" class="btn-block">Log in</button>
+          <mat-tab-group>
+            <mat-tab label="Login">  </mat-tab>
+            <mat-tab label="Register">  </mat-tab>
+          </mat-tab-group>
+
+        
+        <button mat-stroked-button color="accent" class="btn-block" >Log in</button>
        
       <div *ngIf="!user">
         <a class="btn btn-outline-dark" (click)="loginWithGmail()" role="button" style="width: 100%; margin-top: 10px;padding: 12px;">
@@ -26,6 +24,7 @@
         <button mat-raised-button color="primary" style="width: 100%; margin-top: 5px; height: 50px;" (click)="facebookLogin()">Login with facebook</button>
 
         </div>
+      </mat-card-content>
       </form>
     </mat-card>
   <mat-card *ngIf="user">

@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
       // An error happened.
     });
   }
- 
+
  
   loginWithGmail() {
 
