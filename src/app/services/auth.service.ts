@@ -21,4 +21,8 @@ export class AuthService {
       localStorage.setItem('user',JSON.stringify(res.user))
     })
   }
+  logout(){
+    this.firebaseAuth.signOut()
+    localStorage.removeItem('user')
+    }
 }
