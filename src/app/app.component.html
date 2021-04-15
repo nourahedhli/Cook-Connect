@@ -13,7 +13,7 @@
             <mat-tab label="Login">  
               <input type="text" #emailSignup/>
               <input type="text" #passwordSignup/>
-              <button mat-stroked-button color="accent" class="btn-block" (click)="onSignup(emailSignup.value,passwordSignup.value)">Log in</button>
+              <button mat-stroked-button color="accent" class="btn-block" (click)="onSignin(emailSignup.value,passwordSignup.value)">Log in</button>
             </mat-tab>
           </div>
 
@@ -21,7 +21,7 @@
             <mat-tab label="Register">  
               <input type="text"#email/>
               <input type="text" #password/>
-              <button mat-stroked-button color="accent" class="btn-block" (click)="onSignin(email.value,password.value)">Register</button>
+              <button mat-stroked-button color="accent" class="btn-block" (click)="onSignup(email.value,password.value)">Register</button>
             </mat-tab>
           </div>
           </mat-tab-group>
