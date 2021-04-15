@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import firebase from 'firebase/app';
+import { AuthService } from './services/auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,11 +11,17 @@ export class AppComponent implements OnInit {
   title="demoApp";
   provider:any;
   user:any;
+  isSignedIn = false
 
-  constructor(){
-
-  }
+  constructor(public firebaseService : AuthService){}
   ngOnInit(): void {
+    if(localStorage.getItem('user')!==null)
+    this.isSignedIn= true
+    else
+    this.isSignedIn= false
+
+
+
     var provider = new firebase.auth.GoogleAuthProvider();
     
     this.provider = provider;
@@ -22,6 +29,20 @@ export class AppComponent implements OnInit {
       this.user = user;
     });
 
+  }
+
+  async onSignup(email:string,password:string){
+    await this.firebaseService.signup(email,password)
+    if(this.firebaseService.isLoggedIn)
+    this.isSignedIn = true
+  }
+  async onSignin(email:string,password:string){
+    await this.firebaseService.signin(email,password)
+    if(this.firebaseService.isLoggedIn)
+    this.isSignedIn = true
+  }
+  handleLogout(){
+    this.isSignedIn = false
   }
 
   logout(){

@@ -9,23 +9,37 @@
       <form >
         <mat-card-content>
           <mat-tab-group>
-            <mat-tab label="Login">  </mat-tab>
-            <mat-tab label="Register">  </mat-tab>
+            <div *ngIf="!isSignedIn">
+            <mat-tab label="Login">  
+              <input type="text" #emailSignup/>
+              <input type="text" #passwordSignup/>
+              <button mat-stroked-button color="accent" class="btn-block" (click)="onSignup(emailSignup.value,passwordSignup.value)">Log in</button>
+            </mat-tab>
+          </div>
+
+          <div *ngIf="!isSignedIn">
+            <mat-tab label="Register">  
+              <input type="text"#email/>
+              <input type="text" #password/>
+              <button mat-stroked-button color="accent" class="btn-block" (click)="onSignin(email.value,password.value)">Register</button>
+            </mat-tab>
+          </div>
           </mat-tab-group>
 
         
-        <button mat-stroked-button color="accent" class="btn-block" >Log in</button>
+        
        
       <div *ngIf="!user">
         <a class="btn btn-outline-dark" (click)="loginWithGmail()" role="button" style="width: 100%; margin-top: 10px;padding: 12px;">
           <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
           Login with Google
         </a>
-        <button mat-raised-button color="primary" style="width: 100%; margin-top: 5px; height: 50px;" (click)="facebookLogin()">Login with facebook</button>
+        
 
         </div>
       </mat-card-content>
       </form>
+      <app-home *ngIf="isSignedIn" (isLogout)="handleLogout()"> </app-home>
     </mat-card>
   <mat-card *ngIf="user">
     <mat-card-content>
