@@ -4,17 +4,17 @@
 
 
 export const environment = {
-  production: false
-};
-export const firebaseConfig = {
-  apiKey: "AIzaSyAKLF2iGZPDb6E8GXOZ3HKxHSaJ8R01MpE",
-  authDomain: "cook-and-connect-956fd.firebaseapp.com",
-  databaseURL: "https://cook-and-connect-956fd-default-rtdb.firebaseio.com",
-  projectId: "cook-and-connect-956fd",
-  storageBucket: "cook-and-connect-956fd.appspot.com",
-  messagingSenderId: "951889106103",
-  appId: "1:951889106103:web:2e83223071c2d1f23de932",
-  measurementId: "G-F6YLMDXC9C"
+  production: false,
+  firebaseConfig: {
+  apiKey: 'AIzaSyAKLF2iGZPDb6E8GXOZ3HKxHSaJ8R01MpE',
+  authDomain: 'cook-and-connect-956fd.firebaseapp.com',
+  databaseURL: 'https://cook-and-connect-956fd-default-rtdb.firebaseio.com',
+  projectId: 'cook-and-connect-956fd',
+  storageBucket: 'cook-and-connect-956fd.appspot.com',
+  messagingSenderId: '951889106103',
+  appId: '1:951889106103:web:2e83223071c2d1f23de932',
+  measurementId: 'G-F6YLMDXC9C'
+  }
 };
 /*
  * For easier debugging in development mode, you can import the following file

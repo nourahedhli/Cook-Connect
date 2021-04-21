@@ -1,47 +1,62 @@
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import {AngularFireModule} from '@angular/fire'
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+
+//Styles import
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-import {FormsModule} from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatListModule} from '@angular/material/list';
-import { HomeComponent } from './home/home.component';
-import { AuthService } from './services/auth.service';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
+//DB related imports
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+
+//Component import
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent} from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+
+//Services imports
+import { AuthService } from './_services/auth.service';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent
-  ],
+    AppComponent, HomeComponent,  RegisterComponent, LoginComponent],
+  entryComponents: [],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp({apiKey: "AIzaSyAKLF2iGZPDb6E8GXOZ3HKxHSaJ8R01MpE",
-    authDomain: "cook-and-connect-956fd.firebaseapp.com",
-    databaseURL: "https://cook-and-connect-956fd-default-rtdb.firebaseio.com",
-    projectId: "cook-and-connect-956fd",
-    storageBucket: "cook-and-connect-956fd.appspot.com",
-    messagingSenderId: "951889106103",
-    appId: "1:951889106103:web:2e83223071c2d1f23de932",
-    measurementId: "G-F6YLMDXC9C"}),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AppRoutingModule,
-    BrowserAnimationsModule,
     MatCardModule,
     MatTabsModule,
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    IonicModule,
     FormsModule,
+    ReactiveFormsModule,
     MatSnackBarModule,
+    MatToolbarModule,
+    MatSidenavModule,
     MatListModule
   ],
   providers: [AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

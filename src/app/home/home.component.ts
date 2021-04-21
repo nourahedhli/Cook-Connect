@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/type-annotation-spacing */
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import {AuthService} from '../services/auth.service';
+import {AuthService} from '../_services/auth.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -7,14 +8,14 @@ import {AuthService} from '../services/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  @Output() isLogout = new EventEmitter<void>()
+  @Output() isLogout = new EventEmitter<void>();
   constructor(public firebaseService : AuthService) { }
 
   ngOnInit(): void {
   }
   logout(){
-    this.firebaseService.logout()
-    this.isLogout.emit()
+    this.firebaseService.logout();
+    this.isLogout.emit();
   }
 
 }

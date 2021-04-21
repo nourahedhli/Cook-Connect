@@ -1,0 +1,23 @@
+<div class="center-content">
+    <mat-card class="container">
+        <form>
+            <mat-card-content>
+                <div *ngIf="!isSignedIn">
+                    <center>
+                        <h2>Login</h2>
+                        <input type="text" #emailSignup/><br>
+                        <input type="text" #passwordSignup/><br>
+                        <button mat-button color="accent" class="btn-block" (click)="onSignin(emailSignup.value,passwordSignup.value)">Log in</button>
+                        <br>
+                        <a class="mat-button.primary" (click)="loginWithGmail()" role="button" style="width: 100%; margin-top: 10px;padding: 12px;">
+                            <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" /> Login with Google
+                        </a> <br>
+                    </center>
+                </div>
+                <div *ngIf="user">
+                    Logged in with {{user.displayName}} <br> <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+                </div>
+            </mat-card-content>
+        </form>
+        <app-home *ngIf="isSignedIn" (isLogout)="handleLogout()"> </app-home>
+    </mat-card>
